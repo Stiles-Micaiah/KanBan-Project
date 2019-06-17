@@ -7,7 +7,9 @@ let ObjectId = Schema.Types.ObjectId
 
 var childSchema = new Schema({
   authorId: { type: ObjectId, ref: 'User', required: true },
-  content: { type: String, required: true }
+  content: { type: String, required: true },
+  upVotes: { type: Number, required: true, default: [] },
+  downVotes: { type: Number, required: true, default: [] }
 });
 
 let _schema = new Schema({
@@ -16,6 +18,8 @@ let _schema = new Schema({
   listId: { type: ObjectId, ref: 'list', required: true },
   boardId: { type: ObjectId, ref: 'Board', required: true },
   comments: [childSchema],
+  upVotes: { type: Number, required: true, default: 0 },
+  downVotes: { type: Number, required: true, default: 0 }
 }, { timestamps: true })
 
 export default class TaskService {

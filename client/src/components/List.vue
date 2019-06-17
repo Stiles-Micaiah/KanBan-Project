@@ -1,7 +1,7 @@
 <template>
   <div class="List">
     <h2>{{listData.title}}</h2>
-    <!-- <h4>{{listData.authorId}}</h4> -->
+    <!-- <h4>{{listData.author}}</h4> -->
     <task class="card" v-for="t in tasks" :taskData='t' />
     <form class="form" @submit.prevent="createTask" v-if="listData._id">
       <input type="text" class="form-control mr-sm-2" placeholder="Name" v-model="newTask.title" Required>

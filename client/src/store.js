@@ -53,6 +53,7 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'boards' })
+          console.log('register res', res)
         })
     },
     authenticate({ commit, dispatch }) {
@@ -60,6 +61,7 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'boards' })
+          console.log('auth', res)
         })
         .catch(res => {
           router.push({ name: 'login' })
@@ -68,8 +70,9 @@ export default new Vuex.Store({
     logOut({ commit, dispatch }) {
       auth.delete('/logout')
         .then(res => {
-          router.push({name: 'login'})
+          router.push({ name: 'login' })
           console.log('logout res', res)
+          location.reload(true)
         }).catch(err => {
           console.error(err)
         })
@@ -79,6 +82,7 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'boards' })
+          console.log('login res', res)
         })
     },
     //#endregion

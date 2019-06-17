@@ -1,23 +1,18 @@
 <template>
-  <div class="boards">
-
-    <form @submit.prevent="addBoard">
-      <input type="text" placeholder="title" v-model="newBoard.title" required>
-      <input type="text" placeholder="description" v-model="newBoard.description">
-      <button type="submit">Create Board</button>
-    </form>
-
-    <div style="height: auto; margin: 25px; min-width: 320px; max-width: 8%" class="card card-803 "
+  <div class="boards container-fluid">
+    <div style="height: auto; margin: 25px; min-width: 300px; max-width: 50%" class="card card-803 "
       v-for="board in boards" :key="board._id">
       <router-link class="title-color card-header" :to="{name: 'board', params: {boardId: board._id}}">{{board.title}}
       </router-link>
       <h6 class="mix-a-lot">Board By:{{board.authorId}}</h6>
-      <div class="card-body">
-        <p class=" body-color card-text">{{board.description}}</p>
-      </div>
+      <img :src="board.image" alt="">
 
-      <div class="card-body">
-        <!-- <button class="btn btn-info rounded-pill ">You like this</button> -->
+      <div class="card-body container w-100">
+        <div class="btn-vote inline-block row">
+          <button class="btn btn-info rounded-pill" @click="upVoteThis">^</button>
+          {{board.upVotes.length}}:{{board.downVotes.length}}
+          <button class="btn btn-info rounded-pill" @click="downVoteThis">v</button>
+        </div>
         <button @click="deleteBoard(board._id)" class="btn btn-secondary rounded ">Delete</button>
       </div>
       <div style="-webkit-text-fill-color: blueviolet;" class="card-footer text-muted">
@@ -34,7 +29,8 @@
       return {
         newBoard: {
           title: "",
-          description: ""
+          image: "",
+          name: this.$store.state.activeUser.name
         }
       };
     },
@@ -55,7 +51,7 @@
     methods: {
       addBoard() {
         this.$store.dispatch("addBoard", this.newBoard);
-        this.newBoard = { title: "", description: "" };
+        this.newBoard = { title: "", image: "" };
       },
       deleteBoard(boardId) {
         this.$store.dispatch("deleteBoard", boardId);

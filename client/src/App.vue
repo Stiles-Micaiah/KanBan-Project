@@ -28,7 +28,7 @@
             <router-link style="color: #fffb00;" class="nav-link" to="/about">Michael</router-link>
           </li>
         </ul>
-        <button v-if="this.$store.state.activeUser"
+        <button v-if="this.$store.state.activeUser.name"
           class="fancy-pancy-create-button btn btn-sm btn-secondary nav-item dropdown">
           <a style="width: 100%; height: 100%;" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
             role="button" aria-haspopup="true" aria-expanded="false">Create New</a>
@@ -42,7 +42,7 @@
             <button style="width: 100%" class="btn btn-secondary my-2 my-sm-0" type="submit">Create</button>
           </form>
         </button>
-        <button class="btn btn-sm btn-secondary" @click="logOut()">F</button>
+        <button class="btn btn-sm btn-secondary rounded" @click="logOut()">LogOut</button>
       </div>
     </nav>
     <router-view />
@@ -71,6 +71,11 @@
           content: '' || 'No Description',
           creator: '', //make user
         }
+      }
+    },
+    computed: {
+      user() {
+        this.$store.state.activeUser.name
       }
     },
     methods: {

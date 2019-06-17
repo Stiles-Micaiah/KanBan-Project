@@ -9,8 +9,10 @@ let _taskRepo = new TaskService().repository
 
 let _schema = new Schema({
   title: { type: String, required: true },
-  description: { type: String, required: true, default: "No desc" },
-  authorId: { type: ObjectId, ref: 'User', required: true }
+  image: { type: String, required: true, default: "https://www.bing.com/th?id=OIP.Vo2AM6P-OB8DUypR4KTSFQHaFj&pid=Api&rs=1&p=0" },
+  authorId: { type: ObjectId, ref: 'User', required: true },
+  upVotes: { type: Number, required: true, default: [] },
+  downVotes: { type: Number, required: true, default: [] }
 }, { timestamps: true })
 
 //CASCADE ON DELETE
